@@ -1,0 +1,92 @@
+.layout {
+    width: 100%;
+    max-width: 1024px;
+    margin: auto;
+    background-color: white;
+    border-collapse: collapse;
+}
+
+.layout tr td {
+    padding: 20px;
+    vertical-align: top;
+    border: solid 1px gray;
+}
+
+.header {
+    font-size: 30px;
+}
+
+.footer {
+    text-align: center;
+}
+
+.sidebarHeader {
+    font-size: 20px;
+}
+
+.sidebar ul {
+    padding-left: 20px;
+}
+a {
+    text-decoration: none;
+}
+a, a:visited {
+    color: darkgreen;
+}
+.comment {
+    display:inline;
+    border: 1px solid lightgray;
+    border-radius:5px;
+    background-color:lightgray;
+}
+
+.list {
+    display:inline;
+    padding-left:0;
+}
+
+.list li{
+    display:inline;
+    margin-right:20px
+}
+
+ul.user {
+    padding-left: 0;
+    list-style: none;
+}
+
+.display-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.online, .offline{
+    display: inline-block;
+}
+
+.online::before, .offline::before {
+    content: '';
+    display: inline-block;
+    margin-right: 10px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.online::before{
+    background-color: #690;
+    box-shadow: #000 0 -1px 7px 1px, inset #460 0 -1px 9px, #7D0 0 2px 12px;
+}
+
+.offline::before {
+    background-color: #f90;
+    box-shadow: #000 0 -1px 7px 1px, inset #600 0 -1px 9px, #F00 0 2px 12px;
+}
+
+.paginator {
+    text-align: center;
+}
+/*
+span {
+    background-color: rgba(0, 99, 0, 0.5);
+    font-weight: 700;
+}*/

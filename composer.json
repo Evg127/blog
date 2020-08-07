@@ -1,0 +1,19 @@
+{
+    "name": "user/myproject",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "User",
+            "email": "kristall@ua.fm"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MyProject\\": "src/MyProject/"
+        }
+    }, "require": {
+        "erusev/parsedown": "^1.7",
+        "ext-mbstring": "*"
+    }
+}

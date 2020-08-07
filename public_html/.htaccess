@@ -1,0 +1,10 @@
+#reroute mode enable
+RewriteEngine On
+
+#reroute condition: if not a directory
+RewriteCond %{SCRIPT_FILENAME} !-d
+#reroute condition: if not a file
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+#reroute rule: if not a folder and not a file rerout to index.php with Get-parameter "route"
+RewriteRule ^(.*)$ ./index.php?route=$1 [QSA,L]

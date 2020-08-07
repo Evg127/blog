@@ -1,0 +1,35 @@
+<?php
+$title = 'avatar set';
+use \MyProject\Services\Flasher;
+use \MyProject\Services\ImageServices;
+include __DIR__.'/../header.php';?>
+    <a href="/users/<?=$user->getId()?>/settings"><button>Back to user's settings</button></a>
+    <form action="/users/<?=$user->getId()?>/settings/avatar" method="post" enctype="multipart/form-data">
+        <hr>
+        <h3>Your current avatar</h3>
+        <?php if ($user->getAvatar() !== null): ?>
+            <img src="<?=$user->getAvatar();?>" alt="User's avatar">
+            <br>
+        <?php endif ?>
+        <label>
+            <input type="radio" name="avatar" value="none">
+            Do not use an avatar
+        </label>
+        <hr>
+        <h3>Custom avatar</h3>
+        <label>
+            <input type="radio" name="avatar" value="custom"
+                <?= !empty($isCorrect) ? 'checked' :'' ?>>
+            Use custom avatar
+        </label>
+        <p style="font-size: small; color: gray"><i>Maximum size of custom image is 128*128 pixels and 20 KB<br>
+           To change an avatar click the SAVE CHANGES button after an option choosing'</i></p>
+        <p>
+            <input type="file" name="attachment">
+        </p>
+        <span style="color: red"><?=Flasher::get('error')?></span>
+        <span style="color: green"><?=Flasher::get('success')?></span>
+        <hr>
+        <input type="submit" value="Save changes" name="post">
+    </form>
+<?php include __DIR__.'/../footer.php'; ?>
