@@ -48,14 +48,13 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @param string $returnPrefix
-     * @param int $articleId
+     * @param $articleId
      * @throws DbException
      * @throws ForbiddenException
      * @throws NotFoundException
      * @throws UnauthorizedException
      */
-    public function edit(string $returnPrefix, int $articleId): void
+    public function edit(int $articleId): void
     {
         $article = Article::getById($articleId);
 
@@ -76,15 +75,10 @@ class ArticlesController extends AbstractController
                 $this->view->renderHtml('/articles/edit.php', ['error' => $exception->getMessage()]);
                 return;
             }
-            if (!empty($returnPrefix)) {
-                $url = '/' . $returnPrefix . '/articles';
-            } else {
-                $url = '/articles/'.$articleId;
-            }
-            header('Location: ' . $url, true, 302);
+            header('Location: /articles/'.$articleId, true, 302);
             exit();
         }
-        $this->view->renderHtml('articles/edit.php', ['article' => $article, 'prefix' => $returnPrefix]);
+        $this->view->renderHtml('articles/edit.php', ['article' => $article]);
     }
 
     /**

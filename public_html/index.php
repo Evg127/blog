@@ -8,12 +8,11 @@ use \MyProject\Exceptions\DbException;
 use \MyProject\Exceptions\UnauthorizedException;
 
 require __DIR__ . '/../vendor/autoload.php';
-
 $routes = require __DIR__.'/../src/routes.php';
 
 $route = $_GET['route'] ?? '';
-
 $isRouteFound = false;
+
 foreach ($routes as $pattern => $controllerNameAndAction) {
     preg_match($pattern, $route, $matches);
     if (!empty($matches)) {
@@ -21,6 +20,7 @@ foreach ($routes as $pattern => $controllerNameAndAction) {
         break;
     }
 }
+
 try {
     if (!$isRouteFound) {
         throw new NotFoundException('Wrong page');
