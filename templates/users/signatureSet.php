@@ -1,7 +1,7 @@
 <?php
 $title = 'signature set';
 include __DIR__.'/../header.php'; ?>
-    <a href="/users/<?=$user->getId()?>/settings"><button>Back to user's settings</button></a>
+    <a><button onclick='location.href = "/users/<?=$user->getId()?>/settings"'>Back to user's settings</button></a>
 <form action="/users/<?=$user->getId()?>/settings/signature" method="post">
     <hr><br>
     <label for="text">Your signature:</label><br>

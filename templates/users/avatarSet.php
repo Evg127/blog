@@ -3,7 +3,7 @@ $title = 'avatar set';
 use \MyProject\Services\Flasher;
 use \MyProject\Services\ImageServices;
 include __DIR__.'/../header.php';?>
-    <a href="/users/<?=$user->getId()?>/settings"><button>Back to user's settings</button></a>
+    <a><button onclick='location.href="/users/<?=$user->getId()?>/settings"'>Back to user's settings</button></a>
     <form action="/users/<?=$user->getId()?>/settings/avatar" method="post" enctype="multipart/form-data">
         <hr>
         <h3>Your current avatar</h3>

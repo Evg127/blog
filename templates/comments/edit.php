@@ -1,6 +1,6 @@
 <?php $title = 'comment\s edit'?>?
 <?php include __DIR__ . '/../header.php'; ?>
-    <a href="/articles/<?=$articleId?>"><button>Back to article</button></a>
+    <a><button onclick='location.href="/articles/<?=$articleId?>"'>Back to article</button></a>
     <h1>Comment edit form</h1>
 <?php if(!empty($error)): ?>
     <div style="color: #ff0000;"><?= $error ?></div>
