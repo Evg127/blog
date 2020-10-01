@@ -1,6 +1,6 @@
 <?php $title = 'all comments by author'?>
 <?php include_once __DIR__.'/../header.php'; ?>
-<a href="/users/<?=$authorId?>"><button>Back to User profile</button>
+<a><button onclick='location.href="/users/<?=$authorId?>"'>Back to User profile</button>
 <?php if (!empty($comments)): ?>
     <?php foreach ($comments as $comment): ?>
         <p>
