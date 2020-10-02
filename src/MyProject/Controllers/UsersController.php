@@ -175,7 +175,7 @@ class UsersController extends AbstractController
      * @throws DbException
      * @throws InvalidArgumentException
      */
-    public function settings(int $id)
+    public function userProfile(int $id)
     {
         if ($this->user === null || $this->user->getId() !== $id) {
             throw new InvalidArgumentException('Wrong Id');
