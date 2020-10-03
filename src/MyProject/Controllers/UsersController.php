@@ -222,10 +222,10 @@ class UsersController extends AbstractController
                 if ($avatar === 'custom') {
                     if (!empty($_FILES['attachment']['name'])) {
                         ImageServices::upload($id, $_FILES['attachment']);
-                    } else {
-                        Flasher::set('error', 'For custom avatar some file must be chosen');
                     }
                 }
+                header('Location: /users/' . $id . '/settings');
+                exit();
             } else {
                 Flasher::set('error', 'You have not chosen an option');
             }
