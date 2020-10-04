@@ -33,18 +33,18 @@ try {
     $controller->$controllerAction(...$matches);
 } catch (DbException $exception) {
     $view = new View(__DIR__ . '/../templates/errors');
-    $view->renderHtml('500.php',['error' => $exception->getMessage()], 500);
+    $view->renderHtml('500.php',['error' => $exception->getMessage(), 'title' => 'Error 500'], 500);
 } catch (NotFoundException $exception) {
     $view = new View(__DIR__ . '/../templates/errors');
-    $view->renderHtml('404.php',['error' => $exception->getMessage()], 404);
+    $view->renderHtml('404.php',['error' => $exception->getMessage(), 'title' => 'Error 404'], 404);
 } catch (UnauthorizedException $exception) {
     $view = new View(__DIR__ . '/../templates/errors');
-    $view->renderHtml('401.php',['error' => $exception->getMessage()], 401);
+    $view->renderHtml('401.php',['error' => $exception->getMessage(), 'title' => 'Error 401'], 401);
 } catch (ForbiddenException $exception) {
     $view = new View(__DIR__ . '/../templates/errors');
-    $view->renderHtml('403.php', ['error' => $exception->getMessage()], 403);
+    $view->renderHtml('403.php', ['error' => $exception->getMessage(), 'title' => 'Error 403'], 403);
 } catch (InvalidArgumentException $exception) {
     $view = new View(__DIR__ . '/../templates/errors');
-    $view->renderHtml('400.php', ['error' => $exception->getMessage()]);
+    $view->renderHtml('400.php', ['error' => $exception->getMessage(), 'title' => 'Error 400']);
     exit();
 }
