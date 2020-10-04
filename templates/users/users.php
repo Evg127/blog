@@ -1,4 +1,3 @@
-<?php $title = 'all users'?>
 <?php include __DIR__.'/../header.php'; ?>
 <?php if ($user !== null && $user->isAdmin()):?>
     <h2>USERS</h2>

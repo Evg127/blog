@@ -1,4 +1,3 @@
-<?php $title = 'all articles';?>
 <?php include_once __DIR__.'/../header.php'; ?>
 <?php foreach ($articles as $article):?>
     <h3><a href="/articles/<?=$article->getId()?>"><?=$article->getName()?></a></h3>

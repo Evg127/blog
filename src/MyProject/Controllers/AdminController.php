@@ -19,6 +19,7 @@ class AdminController extends AbstractController
     /**
      * AdminController constructor.
      * @throws ForbiddenException
+     * @throws DbException
      */
     public function __construct()
     {
@@ -30,7 +31,7 @@ class AdminController extends AbstractController
 
     public function main(): void
     {
-        $this->view->renderHtml('admin/main.php');
+        $this->view->renderHtml('admin/main.php', ['title' => 'Main Admin']);
         return;
     }
 
@@ -40,7 +41,7 @@ class AdminController extends AbstractController
     public function users()
     {
         $users = User::getAll();
-        $this->view->renderHtml('users/users.php', ['users' => $users]);
+        $this->view->renderHtml('users/users.php', ['users' => $users, 'title' => 'Users']);
         return;
     }
 
@@ -50,14 +51,18 @@ class AdminController extends AbstractController
     public function articles()
     {
         $articles = Article::getAll();
-        $this->view->renderHtml('articles/viewAll.php', ['articles' => $articles]);
+        $this->view->renderHtml('articles/viewAll.php', ['articles' => $articles, 'title' => 'Articles']);
         return;
     }
 
+
+    /**
+     * @throws DbException
+     */
     public function comments()
     {
         $comments = Comment::getAll();
-        $this->view->renderHtml('comments/allComments.php', ['comments' => $comments]);
+        $this->view->renderHtml('comments/allComments.php', ['comments' => $comments, 'title' => 'Comments']);
         return;
     }
 }

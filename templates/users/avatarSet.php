@@ -1,12 +1,11 @@
 <?php
-$title = 'avatar set';
 use \MyProject\Services\Flasher;
-use \MyProject\Services\ImageServices;
-include __DIR__.'/../header.php';?>
+include __DIR__.'/../header.php';
+?>
     <a><button onclick='location.href="/users/<?=$user->getId()?>/settings"'>Back to user's settings</button></a>
     <form action="/users/<?=$user->getId()?>/settings/avatar" method="post" enctype="multipart/form-data">
         <hr>
-        <h3>Your current avatar</h3>
+        <h3>Current avatar</h3>
         <?php if ($user->getAvatar()): ?>
             <img src="<?=$user->getAvatar();?>" alt="User's avatar">
             <br>

@@ -1,4 +1,3 @@
-<?php $title = 'admin panel';?>
 <?php if ($user !== null && $user->isAdmin()):?>
     <?php include __DIR__ . '/../header.php'; ?>
 <p>
