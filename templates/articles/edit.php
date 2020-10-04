@@ -1,10 +1,4 @@
 <?php
-/**
- * @var Article $article
- */
-
-use MyProject\Models\Articles\Article;
-$title = 'article\'s edit';
 include __DIR__ . '/../header.php';
 ?>
 <a><button onclick='location.href="/articles/<?=$article->getId()?>"'>To article</button></a>

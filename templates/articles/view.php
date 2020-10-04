@@ -1,10 +1,4 @@
 <?php
-/**
- * @var Article $article
- */
-
-use MyProject\Models\Articles\Article;
-$title = 'article #'.$article->getId();
 include_once __DIR__ . '/../header.php'; ?>
     <p>Author: <?=$article->getAuthor()->getNickname();?></p>
     <h2><?=$article->getName()?></h2>

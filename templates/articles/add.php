@@ -1,4 +1,3 @@
-<?php $title = 'article\'s add';?>
 <?php include __DIR__ . '/../header.php'; ?>
     <h1>New article creating</h1>
 <?php if(!empty($error)): ?>

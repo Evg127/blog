@@ -29,7 +29,8 @@ class ArticlesController extends AbstractController
             throw new NotFoundException('ERROR_404. Page not found');
         }
         $comments = Comment::getAllByColumn('article_id', $articleId);
-        $this->view->renderHtml('articles/view.php', ['article' => $article, 'comments' => $comments]);
+        $title = $article->getName();
+        $this->view->renderHtml('articles/view.php', ['article' => $article, 'comments' => $comments, 'title' => $title]);
     }
 
     /**
@@ -44,7 +45,8 @@ class ArticlesController extends AbstractController
             throw new NotFoundException('Wrong user id passed');
         }
         $articles = Article::getAllByColumn('author_id', $userId);
-        $this->view->renderHtml('articles/allArticlesByUser.php', ['articles' => $articles, 'userId' => $userId]);
+        $title = 'Articles from ' . $user->getNickname();
+        $this->view->renderHtml('articles/allArticlesByUser.php', ['articles' => $articles, 'userId' => $userId, 'title' => $title]);
     }
 
     /**
@@ -72,13 +74,13 @@ class ArticlesController extends AbstractController
                 $article->updateFromEditForm($_POST);
             } catch (InvalidArgumentException $exception) {
                 $this->view->setAdditionData('article', $article);
-                $this->view->renderHtml('/articles/edit.php', ['error' => $exception->getMessage()]);
+                $this->view->renderHtml('/articles/edit.php', ['error' => $exception->getMessage(), 'title' => 'Edit article']);
                 return;
             }
             header('Location: /articles/'.$articleId, true, 302);
             exit();
         }
-        $this->view->renderHtml('articles/edit.php', ['article' => $article]);
+        $this->view->renderHtml('articles/edit.php', ['article' => $article, 'title' => 'Edit article']);
     }
 
     /**
@@ -99,13 +101,13 @@ class ArticlesController extends AbstractController
                 $article = Article::createFromCreateForm($_POST, $this->user->getId());
             } catch (InvalidArgumentException $exception) {
                 $this->view->setAdditionData('user', $this->user);
-                $this->view->renderHtml('articles/add.php', ['error' => $exception->getMessage()]);
+                $this->view->renderHtml('articles/add.php', ['error' => $exception->getMessage(), 'title' => 'Add article']);
                 return;
             }
             header('Location: /articles/'.$article->getId(), true, 302);
             exit();
         }
-        $this->view->renderHtml('articles/add.php');
+        $this->view->renderHtml('articles/add.php', ['title' => 'Add article']);
     }
 
     /**
@@ -130,7 +132,7 @@ class ArticlesController extends AbstractController
         $article->delete();
         $message = 'Article "'.$article->getName().'" was successfully deleted';
         Comment::deleteAllByColumn('article_id', $articleId);
-        $this->view->renderHtml('successful/successful.php', ['message' => $message]);
+        $this->view->renderHtml('successful/successful.php', ['message' => $message, 'title' => 'Success']);
         return;
     }
 }

@@ -1,4 +1,3 @@
-<?php $title = 'articles by user';?>
 <?php include_once __DIR__.'/../header.php'; ?>
 <a><button onclick='location.href="/users/<?=$userId?>"'>Back to User profile</button>
 <?php if ($articles !== null):?>
