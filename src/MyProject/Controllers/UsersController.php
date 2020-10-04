@@ -29,13 +29,13 @@ class UsersController extends AbstractController
             try {
                 $user = User::registration($_POST);
             } catch (InvalidArgumentException $exception) {
-                $this->view->renderHtml('users/register.php', ['error' => $exception->getMessage()]);
+                $this->view->renderHtml('users/register.php', ['error' => $exception->getMessage(), 'title' => 'Register']);
                 return;
             }
             if ($user instanceof User) {
                 $code = UserActivationService::activationCodeCreate($user);
                 $message = 'New user with nickname <b>'.$user->getNickname().'</b> created.<br>Check your email, noticed during registration for activation link';
-                $this->view->renderHtml('successful/successful.php', ['message' => $message]);
+                $this->view->renderHtml('successful/successful.php', ['message' => $message, 'title' => 'Success']);
                 EmailSender::send($user, 'Активация', 'userActivation.php', [
                     'userId' => $user->getId(),
                     'code' => $code
@@ -43,11 +43,11 @@ class UsersController extends AbstractController
                 return;
             } else {
                 $message = 'Something went wrong';
-                $this->view->renderHtml('unsuccessful/unsuccessful.php', ['message' => $message]);
+                $this->view->renderHtml('unsuccessful/unsuccessful.php', ['message' => $message, 'title' => 'UnSuccess']);
                 return;
             }
         }
-        $this->view->renderHtml('users/register.php');
+        $this->view->renderHtml('users/register.php', ['title' => 'Register']);
     }
 
     /**
@@ -61,11 +61,11 @@ class UsersController extends AbstractController
             UserActivationService::activate($userId);
             $message = 'Your account is activated now';
             UserActivationService::activationCodeDelete($userId);
-            $this->view->renderHtml('successful/successful.php', ['message' => $message]);
+            $this->view->renderHtml('successful/successful.php', ['message' => $message, 'title' => 'Success']);
             return;
         } else {
             $message = 'Something wrong with activation data. Check your activation link.';
-            $this->view->renderHtml('unsuccessful/unsuccessful.php', ['message' => $message]);
+            $this->view->renderHtml('unsuccessful/unsuccessful.php', ['message' => $message, 'title' => 'UnSuccess']);
             return;
         }
     }
@@ -79,7 +79,7 @@ class UsersController extends AbstractController
             try {
                 $user = User::login($_POST);
             } catch (InvalidArgumentException $exception) {
-                $this->view->renderHtml('users/login.php', ['error' => $exception->getMessage()]);
+                $this->view->renderHtml('users/login.php', ['error' => $exception->getMessage(), 'title' => 'User login']);
                 return;
             }
             if ($user instanceof User) {
@@ -88,7 +88,7 @@ class UsersController extends AbstractController
                 exit;
             }
         }
-        $this->view->renderHtml('users/login.php');
+        $this->view->renderHtml('users/login.php', ['title' => 'User login']);
         return;
     }
 
@@ -116,7 +116,7 @@ class UsersController extends AbstractController
         if ($userById === null) {
             throw new InvalidArgumentException('Wrong user id passed');
         }
-        $this->view->renderHtml('users/user.php', ['userById' => $userById]);
+        $this->view->renderHtml('users/user.php', ['userById' => $userById, 'title' => 'User profile']);
         return;
     }
 
@@ -135,7 +135,7 @@ class UsersController extends AbstractController
             try {
                 $role = $userById->changeAndSaveRole($_POST, $userById);
             } catch (InvalidArgumentException $exception) {
-                $this->view->renderHtml('/users/user.php', ['message' => $exception->getMessage(), 'userById' => $userById]);
+                $this->view->renderHtml('/users/user.php', ['message' => $exception->getMessage(), 'userById' => $userById, 'title' => 'User profile']);
                 return;
             }
             Flasher::set('successRoleControl', $userById->getNickname().'\'s role was successfully changed to "'.$role.'"');
@@ -161,7 +161,7 @@ class UsersController extends AbstractController
                 $modifiedUserById = UserActivationService::activationStatusChange($_POST, $userById);
 
             } catch (InvalidArgumentException $exception) {
-                $this->view->renderHtml('/users/user.php', ['message' => $exception->getMessage(), 'userById' => $userById]);
+                $this->view->renderHtml('/users/user.php', ['message' => $exception->getMessage(), 'userById' => $userById, 'title' => 'User profile']);
                 return;
             }
             Flasher::set('successActivationControl', $modifiedUserById->getNickname().' activation was successfully modified');
@@ -181,7 +181,7 @@ class UsersController extends AbstractController
             throw new InvalidArgumentException('Wrong Id');
         }
         $activity = Comment::getAllByColumn('author_id', $id);
-        $this->view->renderHtml('users/settings.php', ['activity' => $activity, 'user' => User::getById($id)]);
+        $this->view->renderHtml('users/settings.php', ['activity' => $activity, 'user' => User::getById($id), 'title' => 'User settings']);
         return;
     }
 
@@ -200,7 +200,7 @@ class UsersController extends AbstractController
             header('Location: /users/' . $id . '/settings');
             exit();
         }
-        $this->view->renderHtml('/users/signatureSet.php', ['user' => $this->user]);
+        $this->view->renderHtml('/users/signatureSet.php', ['user' => $this->user, 'title' => 'Set signature']);
         return;
     }
 
@@ -230,7 +230,7 @@ class UsersController extends AbstractController
                 Flasher::set('error', 'You have not chosen an option');
             }
         }
-        $this->view->renderHtml('/users/avatarSet.php', ['user' => $this->user]);
+        $this->view->renderHtml('/users/avatarSet.php', ['user' => $this->user, 'title' => 'Set avatar']);
         return;
     }
 }

@@ -1,6 +1,5 @@
 <?php use MyProject\Services\Flasher;
 
-$title = 'user profile';
 include __DIR__.'/../header.php'; ?>
 <?php if (isset($user) && $user->isAdmin()):?>
     <h3>USER INFO:</h3>

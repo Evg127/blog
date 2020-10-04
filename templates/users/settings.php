@@ -1,5 +1,4 @@
 <?php
-$title = 'user profile';
 $colspan = 3;
 $settingsOn = 1;
 include __DIR__.'/../header.php'; ?>

@@ -9,7 +9,6 @@
                 <?=$user->getNickname()?>
             </a>
         </p>
-
         <hr>
     <?php endforeach; ?>
 <?php endif?>
