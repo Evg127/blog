@@ -27,13 +27,14 @@ class MainController extends AbstractController
             $pagination = new Paginator($currentPage, count($articles), $pathForPaginationLinks);
             $articles = Article::getByLimit( $pagination->getOffset(), $pagination->getPagesLimit());
         }
-        $this->view->renderHtml('main/main.php', ['articles' => $articles, 'comments' => $comments, 'pagination' => $pagination]);
-        //exit();
+        $title = 'Blog/' . $currentPage;
+        $this->view->renderHtml('main/main.php', ['articles' => $articles, 'comments' => $comments, 'pagination' => $pagination, 'title' => $title]);
+        exit();
     }
 
     public function about()
     {
-        $this->view->renderHtml('about.php');
+        $this->view->renderHtml('about.php', ['title' => 'About']);
         exit();
     }
 }

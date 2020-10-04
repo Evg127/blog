@@ -1,6 +1,5 @@
 <?php use MyProject\Models\Comments\Comment;
 
-$title = 'home';
 include_once __DIR__.'/../header.php'; ?>
 <?php if ($user !== null && $user->isAdmin()):?><a href="/articles/add"><button>Add new article</button></a><hr>
 <?php endif?>
