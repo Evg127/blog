@@ -1,4 +1,3 @@
-<?php $title = 'comment\s edit'?>?
 <?php include __DIR__ . '/../header.php'; ?>
     <a><button onclick='location.href="/articles/<?=$articleId?>"'>Back to article</button></a>
     <h1>Comment edit form</h1>

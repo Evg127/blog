@@ -1,8 +1,6 @@
 <?php
 
-
 namespace MyProject\Controllers;
-
 
 use MyProject\Exceptions\DbException;
 use MyProject\Exceptions\ForbiddenException;
@@ -38,13 +36,14 @@ class CommentsController extends AbstractController
                     'error' => $exception->getMessage(),
                     'article' => Article::getById($articleId),
                     'comments' => Comment::getAllByColumn('article_id', $articleId),
+                    'title' => 'Add comment',
                 ]);
                 return;
             }
             header('Location: /articles/'.$articleId.'#comment'.$comment->getId());
             exit();
         }
-        $this->view->renderHtml('comments/add.php', ['article' => $article = Article::getById($articleId)]);
+        $this->view->renderHtml('comments/add.php', ['article' => $article = Article::getById($articleId), 'title' => 'Success']);
         return;
     }
 
@@ -84,7 +83,7 @@ class CommentsController extends AbstractController
         }
         if ($this->user->getId() === $comment->getAuthorId() || $this->user->isAdmin()) {
             if (empty($_POST)) {
-                $this->view->renderHtml('comments/edit.php', ['comment' => $comment, 'articleId' => $articleId]);
+                $this->view->renderHtml('comments/edit.php', ['comment' => $comment, 'articleId' => $articleId, 'title' => 'Edit comment']);
                 return;
             }
 
@@ -92,7 +91,7 @@ class CommentsController extends AbstractController
                 $comment->edit($_POST);
             } catch (InvalidArgumentException $exception) {
                 $this->view->setAdditionData('error', $exception->getMessage());
-                $this->view->renderHtml('comments/edit.php', ['comment' => $comment, 'articleId' => $articleId]);
+                $this->view->renderHtml('comments/edit.php', ['comment' => $comment, 'articleId' => $articleId, 'title' => 'Edit comment']);
                 return;
             }
             header('Location: /articles/'.$articleId, true, 302);
@@ -114,6 +113,7 @@ class CommentsController extends AbstractController
             throw new NotFoundException('Wrong author id passed');
         }
         $comments = Comment::getAllByColumn('author_id', $authorId);
-        $this->view->renderHtml('comments/allCommentsByAuthor.php', ['comments' => $comments, 'authorId' => $authorId]);
+        $title = 'Comments from ' . $author->getNickname();
+        $this->view->renderHtml('comments/allCommentsByAuthor.php', ['comments' => $comments, 'authorId' => $authorId, 'title' => $title]);
     }
 }

@@ -1,4 +1,3 @@
-<?php $title = 'all comments by author'?>
 <?php include_once __DIR__.'/../header.php'; ?>
 <a><button onclick='location.href="/users/<?=$authorId?>"'>Back to User profile</button>
 <?php if (!empty($comments)): ?>

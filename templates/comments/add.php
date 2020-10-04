@@ -1,4 +1,3 @@
-<?php $title = 'comment\'s add'?>?>
 <?php include_once __DIR__ . '/../header.php'; ?>
 <?php if($user !== null): ?>
     <?php if(!empty($error)): ?>
