@@ -21,14 +21,13 @@ class MainController extends AbstractController
     public function main(int $currentPage = 1)
     {
         $articles = Article::getAll();
-        $comments = Comment::getAll();
         if (is_array($articles)) {
             $pathForPaginationLinks = '/blog/';
             $pagination = new Paginator($currentPage, count($articles), $pathForPaginationLinks);
             $articles = Article::getByLimit( $pagination->getOffset(), $pagination->getPagesLimit());
         }
         $title = 'Blog/' . $currentPage;
-        $this->view->renderHtml('main/main.php', ['articles' => $articles, 'comments' => $comments, 'pagination' => $pagination, 'title' => $title]);
+        $this->view->renderHtml('main/main.php', ['articles' => $articles, 'pagination' => $pagination, 'title' => $title]);
         exit();
     }
 

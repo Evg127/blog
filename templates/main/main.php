@@ -1,6 +1,4 @@
-<?php use MyProject\Models\Comments\Comment;
-
-include_once __DIR__.'/../header.php'; ?>
+<?php include_once __DIR__.'/../header.php'; ?>
 <?php if ($user !== null && $user->isAdmin()):?><a href="/articles/add"><button>Add new article</button></a><hr>
 <?php endif?>
 <?php if (!empty($articles)):?>
@@ -10,8 +8,7 @@ include_once __DIR__.'/../header.php'; ?>
         <p style="font-size: 10pt"><b>Posted at</b> <?=$article->getStringCreatedAt()?>
             <b>by</b> <?=$article->getAuthor()->getNickname()?>
         <?php
-        $comments = Comment::getAllByColumn('article_id', $article->getId());
-        echo $comments !== null ? ' | Comments (' . count($comments) . ')' : '';
+        echo $article->getComments() !== null ? ' | Comments (' . count($article->getComments()) . ')' : '';
         ?>
     </p>
     <hr>

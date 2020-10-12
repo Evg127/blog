@@ -7,6 +7,7 @@ use Exception;
 use MyProject\Exceptions\DbException;
 use MyProject\Exceptions\InvalidArgumentException;
 use MyProject\Models\ActiveRecordEntity;
+use MyProject\Models\Comments\Comment;
 use MyProject\Models\Users\User;
 use Parsedown;
 
@@ -23,6 +24,15 @@ class Article extends ActiveRecordEntity
 
     /** @var string */
     protected $createdAt;
+
+    /**
+     * @return array
+     * @throws DbException
+     */
+    public function getComments(): array
+    {
+        return Comment::getAllByColumn('article_id', $this->id);
+    }
 
     /**
      * @param string $name
