@@ -28,8 +28,8 @@ class ArticlesController extends AbstractController
         if ($article === null) {
             throw new NotFoundException('ERROR_404. Page not found');
         }
-        $comments = Comment::getAllByColumn('article_id', $articleId);
         $title = $article->getName();
+        $comments = $article->getComments();
         $this->view->renderHtml('articles/view.php', ['article' => $article, 'comments' => $comments, 'title' => $title]);
     }
 
