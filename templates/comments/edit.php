@@ -1,5 +1,6 @@
 <?php include __DIR__ . '/../header.php'; ?>
-    <a><button onclick='location.href="/articles/<?=$articleId?>"'>Back to article</button></a>
+    <a><button onclick='location.href="/articles/<?=$articleId?>"'>To article</button></a>
+    <a><button onclick='location.href="/admin/comments"'>To all comments</button></a>
     <h1>Comment edit form</h1>
 <?php if(!empty($error)): ?>
     <div style="color: #ff0000;"><?= $error ?></div>
