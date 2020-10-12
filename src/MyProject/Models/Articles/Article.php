@@ -26,10 +26,10 @@ class Article extends ActiveRecordEntity
     protected $createdAt;
 
     /**
-     * @return array
+     * @return array|null
      * @throws DbException
      */
-    public function getComments(): array
+    public function getComments(): ?array
     {
         return Comment::getAllByColumn('article_id', $this->id);
     }
